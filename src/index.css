@@ -1,0 +1,115 @@
+/* src/index.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@300;400;500;600&display=swap');
+
+/* ── Design tokens ─────────────────────────────────────────────────────────── */
+:root {
+  --bg-void:      #080b0f;
+  --bg-surface:   #0d1117;
+  --bg-raised:    #131920;
+  --bg-card:      #161d26;
+  --border:       #1e2a38;
+  --border-dim:   #161e28;
+
+  --text-primary:  #e8edf2;
+  --text-secondary:#7a8fa8;
+  --text-dim:      #3d5168;
+
+  --accent:       #00ff88;
+  --accent-dim:   #00cc6a;
+  --accent-glow:  rgba(0, 255, 136, 0.12);
+  --accent-glow-strong: rgba(0, 255, 136, 0.22);
+
+  --buy:          #00ff88;
+  --buy-bg:       rgba(0, 255, 136, 0.08);
+  --hold:         #f0c060;
+  --hold-bg:      rgba(240, 192, 96, 0.08);
+  --sell:         #ff4466;
+  --sell-bg:      rgba(255, 68, 102, 0.08);
+  --avoid:        #ff2244;
+  --avoid-bg:     rgba(255, 34, 68, 0.08);
+
+  --low:          #00ff88;
+  --medium:       #f0c060;
+  --high:         #ff8844;
+  --critical:     #ff2244;
+
+  --font-display: 'Syne', sans-serif;
+  --font-mono:    'IBM Plex Mono', monospace;
+
+  --radius-sm:    3px;
+  --radius-md:    6px;
+  --radius-lg:    10px;
+
+  --shadow-card:  0 1px 3px rgba(0,0,0,0.4), 0 0 0 1px var(--border);
+  --shadow-glow:  0 0 24px var(--accent-glow);
+}
+
+/* ── Reset ──────────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background:  var(--bg-void);
+  color:       var(--text-primary);
+  font-family: var(--font-mono);
+  font-size:   13px;
+  line-height: 1.6;
+  min-height:  100vh;
+  overflow-x:  hidden;
+}
+
+/* Scanline overlay */
+body::before {
+  content:    '';
+  position:   fixed;
+  inset:      0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ── Typography ─────────────────────────────────────────────────────────────── */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ── Scrollbar ──────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: var(--bg-surface); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-dim); }
+
+/* ── Animations ─────────────────────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse-accent {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+@keyframes scanIn {
+  from { clip-path: inset(0 0 100% 0); opacity: 0; }
+  to   { clip-path: inset(0 0 0% 0);   opacity: 1; }
+}
+
+.fade-up { animation: fadeUp 0.4s ease both; }
+.fade-up-1 { animation-delay: 0.05s; }
+.fade-up-2 { animation-delay: 0.10s; }
+.fade-up-3 { animation-delay: 0.15s; }
+.fade-up-4 { animation-delay: 0.20s; }
+.fade-up-5 { animation-delay: 0.25s; }
